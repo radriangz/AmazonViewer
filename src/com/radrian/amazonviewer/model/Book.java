@@ -28,7 +28,7 @@ public class Book extends Publication implements IVisualizable{
 	public static ArrayList<Book> makeBooksList() {
 		ArrayList<Book> books = new ArrayList<Book>();
 		
-		for(byte i = 1; i <5; i++) {
+		for(byte i = 1; i <=5; i++) {
 			books.add(new Book("Book 0" + i, new Date(), "Editorial 0" + i, new String[]{"Author 0" + i, "Author 0"  + i}, (i * 1001), "ISBN 0000" + i, false));
 		}
 		return books;
@@ -50,8 +50,8 @@ public class Book extends Publication implements IVisualizable{
 		this.isbn = isbn;
 	}
 
-	public boolean isHasBeenRead() {
-		return hasBeenRead;
+	public String isHasBeenRead() {
+		return hasBeenRead? "Yes": "No";
 	}
 
 	public void setHasBeenRead(boolean hasbeenRead) {
@@ -77,13 +77,13 @@ public class Book extends Publication implements IVisualizable{
 	}
 
 	@Override
-	public Date startToSee(Date dateI) {
+	public Date startToWatch(Date dateI) {
 		return dateI;
 	}
 
 	@Override
-	public void stopToSee(Date dateI, Date dateF) {
-		int result = dateF.getTime() > dateI.getTime() ? (int)(dateF.getTime() - dateI.getTime()) / 1000 : 0;
+	public void stopWatching(Date dateI, Date dateF) {
+		int result = dateF.getTime() > dateI.getTime() ? (int) (dateF.getTime() - dateI.getTime()) : 0;
 		this.setTimeReading(result);
 	}
 }

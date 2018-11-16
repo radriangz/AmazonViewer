@@ -25,7 +25,7 @@ public class Movie extends Film implements IVisualizable{
 	public static ArrayList<Movie> makeMoviesList() {
 		ArrayList<Movie> movies = new ArrayList<Movie>();
 		
-		for(byte i = 1; i <5; i++) {
+		for(byte i = 1; i <=5; i++) {
 			movies.add(new Movie("Movie0" + i, "Género 0" + i, "Creador " + i, (120 + i), (short)(2018 - i)));
 		}
 		return movies;
@@ -55,13 +55,13 @@ public class Movie extends Film implements IVisualizable{
 	}
 
 	@Override
-	public Date startToSee(Date dateI) {
+	public Date startToWatch(Date dateI) {
 		return dateI;
 	}
 
 	@Override
-	public void stopToSee(Date dateI, Date dateF) {
-		int result = dateF.getTime() > dateI.getTime() ? (int)((dateF.getTime() - dateI.getTime()) * 1000) : 0;
+	public void stopWatching(Date dateI, Date dateF) {
+		int result = dateF.getTime() > dateI.getTime() ? (int) (dateF.getTime() - dateI.getTime()) : 0;
 		this.setTimeViewed(result);
 	}
 	
