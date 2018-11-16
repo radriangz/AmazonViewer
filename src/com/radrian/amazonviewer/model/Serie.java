@@ -20,6 +20,15 @@ public class Serie extends Film {
 		this.seasonQuantity = seasonQuantity;
 	}
 
+	public static ArrayList<Serie> makeSeriesList() {
+		ArrayList<Serie> series = new ArrayList<Serie>();
+		
+		for(byte i = 1; i <5; i++) {
+			series.add(new Serie("Serie 0" + i, "Género 0" + i, "Creador " + i, (120 + i), (short)(2018 - i)));
+		}
+		return series;
+	}
+	
 	public int getId() {
 		return id;
 	}

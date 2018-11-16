@@ -56,13 +56,12 @@ public class Movie extends Film implements IVisualizable{
 
 	@Override
 	public Date startToSee(Date dateI) {
-		
 		return dateI;
 	}
 
 	@Override
 	public void stopToSee(Date dateI, Date dateF) {
-		int result = dateF.getTime() > dateI.getTime() ? (int)(dateF.getTime() - dateI.getTime()) / 1000 : 0;
+		int result = dateF.getTime() > dateI.getTime() ? (int)((dateF.getTime() - dateI.getTime()) * 1000) : 0;
 		this.setTimeViewed(result);
 	}
 	

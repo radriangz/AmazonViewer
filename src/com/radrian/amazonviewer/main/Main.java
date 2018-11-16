@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import com.radrian.amazonviewer.model.Movie;
+import com.radrian.amazonviewer.model.Serie;
 
 /**
  * @author RAdrian
@@ -71,26 +72,66 @@ public class Main {
 	}
 
 	public static void showMovies() {
-		int exit = 0;
+		int exit = 1;
 		ArrayList<Movie> movies = Movie.makeMoviesList();
 
 		do {
-			System.out.println("\n:: MOVIES ::\n");
+			System.out.println("\n:: MOVIES ::");
 			for (int i = 0; i < movies.size(); i++) {
 				System.out.println(
-						"Movie 0" + i + 1 + ". " + movies.get(i).getTitle() + "Visto: " + movies.get(i).isViewed());
+						(i + 1) + ". " + movies.get(i).getTitle() + ". Visto: " + movies.get(i).isViewed());
 			}
 			System.out.println("0. Regresar al Menú.\n");
+			System.out.println("Selecciona el número de la película que quieres ver.");
+			int userInput = scan.nextInt();
+			
+			if (userInput == 0) {
+				showMenu();
+			}
+			
+			Movie movieSelected = movies.get(userInput-1);
+			movieSelected.setViewed(true);
+			Date dateI = movieSelected.startToSee(new Date());
+
+			for(int i = 0; i< 100000; i++) {
+				System.out.println(".");
+			}
+			
+			movieSelected.stopToSee(dateI, new Date());
+			System.out.println("\nViste: " + movieSelected + 
+								"\nPor: " + movieSelected.getTimeViewed() + " milisegundos");
+
 		} while (exit != 0);
 
 	}
 
 	public static void showSeries() {
 		int exit = 0;
+		ArrayList<Serie> series = Serie.makeSeriesList();
 
 		do {
 			System.out.println();
 			System.out.println(":: SERIES ::");
+			System.out.println("0. Regresar al Menú.\n");
+			System.out.println("Selecciona el número de la película que quieres ver.");
+			int userInput = scan.nextInt();
+			
+			if (userInput == 0) {
+				showMenu();
+			}
+			
+			Serie serieSelected = series.get(userInput-1);
+			serieSelected.setViewed(true);
+			Date dateI = serieSelected.startToSee(new Date());
+
+			for(int i = 0; i< 100000; i++) {
+				System.out.println(".");
+			}
+			
+			serieSelected.stopToSee(dateI, new Date());
+			System.out.println("\nViste: " + serieSelected + 
+								"\nPor: " + serieSelected.getTimeViewed() + " milisegundos");
+
 		} while (exit != 0);
 	}
 
