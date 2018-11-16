@@ -3,6 +3,8 @@
  */
 package com.radrian.amazonviewer.model;
 
+import java.util.ArrayList;
+
 /**
  * @author RAdrian
  *
@@ -10,7 +12,7 @@ package com.radrian.amazonviewer.model;
 public class Serie extends Film {
 	int id;
 	private int seasonQuantity;
-	private Chapter[] chapters;
+	private ArrayList<Chapter> chapters;
 
 	public Serie(String title, String genre, String creator, int duration,
 				int seasonQuantity) {
@@ -30,11 +32,11 @@ public class Serie extends Film {
 		this.seasonQuantity = seasonQuantity;
 	}
 
-	public Chapter[] getChapters() {
+	public ArrayList<Chapter> getChapters() {
 		return chapters;
 	}
 
-	public void setChapters(Chapter[] chapters) {
+	public void setChapters(ArrayList<Chapter> chapters) {
 		this.chapters = chapters;
 	}
 
@@ -46,7 +48,7 @@ public class Serie extends Film {
 				"\nDuración: " + getDuration() + 
 				"\nAño: " + getYear() + 
 				"\nTemporadas: " + getSeasonQuantity() +
-				"\nEpisodios: " + chapters.length;
+				"\nEpisodios: " + (chapters.size() + 1);
 	}
 
 	
