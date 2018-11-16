@@ -1,12 +1,12 @@
 package com.radrian.amazonviewer.model;
 
 public class Film {
-	public String title;
-	public String genre;
-	public String creator;
-	public int duration;
-	public short year;
-	public boolean viewed;
+	private String title;
+	private String genre;
+	private String creator;
+	private int duration;
+	private short year;
+	private boolean viewed;
 
 	public Film(String title, String genre, String creator, int duration) {
 		super();

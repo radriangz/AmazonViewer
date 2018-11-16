@@ -9,12 +9,13 @@ import java.sql.Date;
  * @author RAdrian
  *
  */
-public class Magazine {
+public class Magazine extends Publication {
 	private int id;
-	private String title;
-	private Date editionDate;
-	private String editorial;
-	private String[] authors;
+
+	public Magazine(String title, Date editorialDate, String editorial, String[] authors, int id) {
+		super(title, editorialDate, editorial, authors);
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
@@ -24,35 +25,12 @@ public class Magazine {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	@Override
+	public String toString() {
+		return "\nMAGAZINE" + 
+				"\nTitle: " + getTitle() + 
+				"\nEditorial: " + getEditorial() + 
+				"\nEdición: " + getEditionDate();
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Date getEditionDate() {
-		return editionDate;
-	}
-
-	public void setEditionDate(Date editionDate) {
-		this.editionDate = editionDate;
-	}
-
-	public String getEditorial() {
-		return editorial;
-	}
-
-	public void setEditorial(String editorial) {
-		this.editorial = editorial;
-	}
-
-	public String[] getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(String[] authors) {
-		this.authors = authors;
-	}
 }

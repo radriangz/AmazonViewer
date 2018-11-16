@@ -6,8 +6,6 @@ package com.radrian.amazonviewer.main;
 import java.util.Date;
 import java.util.Scanner;
 
-import com.radrian.amazonviewer.model.Movie;
-
 /**
  * @author RAdrian
  *

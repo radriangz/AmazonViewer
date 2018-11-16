@@ -3,21 +3,27 @@
  */
 package com.radrian.amazonviewer.model;
 
-import java.sql.Date;
+import java.util.Date;
+
+import com.radrian.amazonviewer.interfaces.IVisualizable;
 
 /**
  * @author RAdrian
  *
  */
-public class Book {
+public class Book extends Publication implements IVisualizable{
 	private int id;
-	private String title;
-	private Date editionDate;
-	private String editorial;
-	private String[] authors;
 	private String isbn;
-	private boolean hasbeenRead;
+	private boolean hasBeenRead;
 	private int timeReading;
+	
+	public Book(String title, Date editorialDate, String editorial, String[] authors, int id, String isbn, boolean hasBeenRead, int timeReading) {
+		super(title, editorialDate, editorial, authors);
+		this.id = id;
+		this.isbn = isbn;
+		this.hasBeenRead = hasBeenRead;
+		this.timeReading = timeReading;
+	}
 
 	public int getId() {
 		return id;
@@ -25,38 +31,6 @@ public class Book {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Date getEditionDate() {
-		return editionDate;
-	}
-
-	public void setEditionDate(Date editionDate) {
-		this.editionDate = editionDate;
-	}
-
-	public String getEditorial() {
-		return editorial;
-	}
-
-	public void setEditorial(String editorial) {
-		this.editorial = editorial;
-	}
-
-	public String[] getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(String[] authors) {
-		this.authors = authors;
 	}
 
 	public String getIsbn() {
@@ -67,12 +41,12 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public boolean isHasbeenRead() {
-		return hasbeenRead;
+	public boolean isHasBeenRead() {
+		return hasBeenRead;
 	}
 
-	public void setHasbeenRead(boolean hasbeenRead) {
-		this.hasbeenRead = hasbeenRead;
+	public void setHasBeenRead(boolean hasbeenRead) {
+		this.hasBeenRead = hasbeenRead;
 	}
 
 	public int getTimeReading() {
@@ -83,4 +57,24 @@ public class Book {
 		this.timeReading = timeReading;
 	}
 
+	@Override
+	public String toString() {
+		return "Title: " + getTitle() + 
+				"\nAutores: " + "" + 
+				"\nEditorial: " + getEditorial() + 
+				"\nEdición: " + getEditionDate() + 
+				"\nISBN: " + getIsbn() +
+				"\nTiempo de lectura: " + getTimeReading();
+	}
+
+	@Override
+	public Date startToSee(Date dateI) {
+		return dateI;
+	}
+
+	@Override
+	public void stopToSee(Date dateI, Date dateF) {
+		int result = dateF.getTime() > dateI.getTime() ? (int)(dateF.getTime() - dateI.getTime()) / 1000 : 0;
+		this.setTimeReading(result);
+	}
 }
