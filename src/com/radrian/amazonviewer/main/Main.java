@@ -3,8 +3,11 @@
  */
 package com.radrian.amazonviewer.main;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+
+import com.radrian.amazonviewer.model.Movie;
 
 /**
  * @author RAdrian
@@ -17,9 +20,9 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		showMenu();
-		
+
 	}
 
 	public static void showMenu() {
@@ -69,56 +72,61 @@ public class Main {
 
 	public static void showMovies() {
 		int exit = 0;
-		
+		ArrayList<Movie> movies = Movie.makeMoviesList();
+
 		do {
-			System.out.println();
-			System.out.println(":: MOVIES ::");
-		} while(exit!= 0);
-		
+			System.out.println("\n:: MOVIES ::\n");
+			for (int i = 0; i < movies.size(); i++) {
+				System.out.println(
+						"Movie 0" + i + 1 + ". " + movies.get(i).getTitle() + "Visto: " + movies.get(i).isViewed());
+			}
+			System.out.println("0. Regresar al Menú.\n");
+		} while (exit != 0);
+
 	}
-	
+
 	public static void showSeries() {
 		int exit = 0;
-		
+
 		do {
 			System.out.println();
 			System.out.println(":: SERIES ::");
-		} while(exit!= 0);
+		} while (exit != 0);
 	}
-	
+
 	public static void showChapters() {
 		int exit = 0;
-		
+
 		do {
 			System.out.println();
 			System.out.println(":: CHAPTERS ::");
-		} while(exit!= 0);
+		} while (exit != 0);
 	}
-	
+
 	public static void showBooks() {
 		int exit = 0;
-		
+
 		do {
 			System.out.println();
 			System.out.println(":: BOOKS ::");
-		} while(exit!= 0);
+		} while (exit != 0);
 	}
-	
+
 	public static void showMagazines() {
 		int exit = 0;
-		
+
 		do {
 			System.out.println();
 			System.out.println(":: MAGAZINES ::");
-		} while(exit!= 0);
+		} while (exit != 0);
 	}
-	
+
 	public static void makeReport() {
-		
+
 	}
-	
+
 	public static void makeReport(Date date) {
-		
+
 	}
-	
+
 }

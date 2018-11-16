@@ -3,6 +3,7 @@
  */
 package com.radrian.amazonviewer.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.radrian.amazonviewer.interfaces.IVisualizable;
@@ -18,8 +19,18 @@ public class Movie extends Film implements IVisualizable{
 	public Movie(String title, String genre, String creator, int duration, short year) {
 		super(title, genre, creator, duration);
 		setYear(year);
+		super.setViewed(false);
 	}
 
+	public static ArrayList<Movie> makeMoviesList() {
+		ArrayList<Movie> movies = new ArrayList<Movie>();
+		
+		for(byte i = 1; i <5; i++) {
+			movies.add(new Movie("Movie0" + i, "Género 0" + i, "Creador " + i, (120 + i), (short)(2018 - i)));
+		}
+		return movies;
+	}
+	
 	public int getId(){
 		return id;
 	}
@@ -27,7 +38,7 @@ public class Movie extends Film implements IVisualizable{
 	public int getTimeViewed() {
 		return timeViewed;
 	}
-
+	
 	public void setTimeViewed(int timeViewed) {
 		this.timeViewed = timeViewed;
 	}
@@ -39,7 +50,8 @@ public class Movie extends Film implements IVisualizable{
 				"\nCreador: " + getCreator() + 
 				"\nAño: " + getYear() +
 				"\nDuración: " + getDuration() + 
-				"\nGénero: " + getGenre();
+				"\nGénero: " + getGenre() + 
+				"\nVisto: " + isViewed();
 	}
 
 	@Override
