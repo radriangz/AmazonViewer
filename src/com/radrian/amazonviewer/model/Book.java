@@ -3,6 +3,7 @@
  */
 package com.radrian.amazonviewer.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.radrian.amazonviewer.interfaces.IVisualizable;
@@ -17,14 +18,22 @@ public class Book extends Publication implements IVisualizable{
 	private boolean hasBeenRead;
 	private int timeReading;
 	
-	public Book(String title, Date editorialDate, String editorial, String[] authors, int id, String isbn, boolean hasBeenRead, int timeReading) {
+	public Book(String title, Date editorialDate, String editorial, String[] authors, int id, String isbn, boolean hasBeenRead) {
 		super(title, editorialDate, editorial, authors);
 		this.id = id;
 		this.isbn = isbn;
 		this.hasBeenRead = hasBeenRead;
-		this.timeReading = timeReading;
 	}
 
+	public static ArrayList<Book> makeBooksList() {
+		ArrayList<Book> books = new ArrayList<Book>();
+		
+		for(byte i = 1; i <5; i++) {
+			books.add(new Book("Book 0" + i, new Date(), "Editorial 0" + i, new String[]{"Author 0" + i, "Author 0"  + i}, (i * 1001), "ISBN 0000" + i, false));
+		}
+		return books;
+	}
+	
 	public int getId() {
 		return id;
 	}

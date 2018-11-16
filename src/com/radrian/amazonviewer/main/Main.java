@@ -110,8 +110,11 @@ public class Main {
 		ArrayList<Serie> series = Serie.makeSeriesList();
 
 		do {
-			System.out.println();
-			System.out.println(":: SERIES ::");
+			System.out.println("\n:: SERIES ::");
+			for (int i = 0; i < series.size(); i++) {
+				System.out.println(
+						(i + 1) + ". " + series.get(i).getTitle() + ". Visto: " + series.get(i).isViewed());
+			}
 			System.out.println("0. Regresar al Menú.\n");
 			System.out.println("Selecciona el número de la película que quieres ver.");
 			int userInput = scan.nextInt();
@@ -120,17 +123,6 @@ public class Main {
 				showMenu();
 			}
 			
-			Serie serieSelected = series.get(userInput-1);
-			serieSelected.setViewed(true);
-			Date dateI = serieSelected.startToSee(new Date());
-
-			for(int i = 0; i< 100000; i++) {
-				System.out.println(".");
-			}
-			
-			serieSelected.stopToSee(dateI, new Date());
-			System.out.println("\nViste: " + serieSelected + 
-								"\nPor: " + serieSelected.getTimeViewed() + " milisegundos");
 
 		} while (exit != 0);
 	}
