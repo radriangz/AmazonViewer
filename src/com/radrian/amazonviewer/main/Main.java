@@ -3,6 +3,7 @@
  */
 package com.radrian.amazonviewer.main;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -11,13 +12,17 @@ import com.radrian.amazonviewer.model.Book;
 import com.radrian.amazonviewer.model.Chapter;
 import com.radrian.amazonviewer.model.Movie;
 import com.radrian.amazonviewer.model.Series;
+import com.radrian.makereport.model.Report;
 
 /**
  * @author RAdrian
  *
  */
 public class Main {
-	public static Scanner scan = new Scanner(System.in);
+	private static Scanner scan = new Scanner(System.in);
+	private static ArrayList<Movie> movies;
+	private static ArrayList<Series> series;
+	private static ArrayList<Book> books;
 
 	/**
 	 * @param args
@@ -75,8 +80,8 @@ public class Main {
 
 	public static void showMovies() {
 		int exit = -1;
-		ArrayList<Movie> movies = Movie.makeMoviesList();
-
+		movies = Movie.makeMoviesList();
+		
 		do {
 			System.out.println("\n:: MOVIES ::");
 			
@@ -91,18 +96,17 @@ public class Main {
 			if (userInput == 0) {
 				showMenu();
 			}
-			
-			Movie movieSelected = movies.get(userInput-1);
-			movieSelected.setViewed(true);
-			Date dateI = movieSelected.startToWatch(new Date());
+			if(userInput > 0) {
+				Movie movieSelected = movies.get(userInput-1);
+				movieSelected.setViewed(true);
+				Date dateI = movieSelected.startToWatch(new Date());
 
-			for(int i = 0; i< 100000; i++) {
-				System.out.println(".");
+				playMedia(100000);
+				
+				movieSelected.stopWatching(dateI, new Date());
+				System.out.println("\nViste: " + movieSelected + 
+									"\nPor: " + movieSelected.getTimeViewed() + " milisegundos");
 			}
-			
-			movieSelected.stopWatching(dateI, new Date());
-			System.out.println("\nViste: " + movieSelected + 
-								"\nPor: " + movieSelected.getTimeViewed() + " milisegundos");
 
 		} while (exit != 0);
 
@@ -110,7 +114,10 @@ public class Main {
 
 	public static void showSeries() {
 		int exit = -1;
-		ArrayList<Series> series = Series.makeSeriesList();
+		
+		if(series == null) {
+			series = Series.makeSeriesList();
+		}
 
 		do {
 			System.out.println("\n:: SERIES ::");
@@ -126,7 +133,10 @@ public class Main {
 			if (userInput == 0) {
 				showMenu();
 			}
-			showChapters(series.get(userInput-1).getChapters());
+			
+			if(userInput > 0) {
+				showChapters(series.get(userInput-1).getChapters());
+			}
 
 		} while (exit != 0);
 	}
@@ -148,30 +158,31 @@ public class Main {
 			if (userInput == 0) {
 				showSeries();
 			}
-			Chapter chapterSelected = chaptersOfSeriesSelected.get(userInput-1);
-			chapterSelected.setViewed(true);
-			Date dateI = chapterSelected.startToWatch(new Date());
+			if(userInput > 0) {
+				Chapter chapterSelected = chaptersOfSeriesSelected.get(userInput-1);
+				chapterSelected.setViewed(true);
+				Date dateI = chapterSelected.startToWatch(new Date());
 
-			for(int i = 0; i< 100000; i++) {
-				System.out.println(".");
+				playMedia(100000);
+
+				chapterSelected.stopWatching(dateI, new Date());
+				System.out.println("\nViste: \n" + chapterSelected + 
+									"\nPor: " + chapterSelected.getTimeViewed() + " milisegundos");
 			}
-			chapterSelected.stopWatching(dateI, new Date());
-			System.out.println("\nViste: \n" + chapterSelected + 
-								"\nPor: " + chapterSelected.getTimeViewed() + " milisegundos");
 			
 		} while (exit != 0);
 	}
 
 	public static void showBooks() {
 		int exit = -1;
-		ArrayList<Book> books = Book.makeBooksList();
-
+		books = Book.makeBooksList();
+		
 		do {
 			System.out.println("\n:: BOOKS ::");
 			
 			for (int i = 0; i < books.size(); i++) {
 				System.out.println((i + 1) + ". " + books.get(i).getTitle() + 
-									". Leído: " + books.get(i).isHasBeenRead());
+									". Leído: " + books.get(i).hasBeenRead());
 			}
 			System.out.println("0. Regresar al Menú.\n");
 			System.out.println("Selecciona el número de la opción deseada.");
@@ -180,17 +191,18 @@ public class Main {
 			if (userInput == 0) {
 				showMenu();
 			} 
-			Book bookSelected = books.get(userInput-1);
-			bookSelected.setHasBeenRead(true);
-			Date dateI = bookSelected.startToWatch(new Date());
+			if(userInput > 0) {
+				Book bookSelected = books.get(userInput-1);
+				bookSelected.setHasBeenRead(true);
+				Date dateI = bookSelected.startToWatch(new Date());
 
-			for(int i = 0; i< 100000; i++) {
-				System.out.println(".");
+				playMedia(100000);
+				
+				bookSelected.stopWatching(dateI, new Date());
+				System.out.println("\nLeiste: \n" + bookSelected + 
+									"\nPor: " + bookSelected.getTimeReading() + " milisegundos");
 			}
-			bookSelected.stopWatching(dateI, new Date());
-			System.out.println("\nLeiste: \n" + bookSelected + 
-								"\nPor: " + bookSelected.getTimeReading() + " milisegundos");
-			
+
 		}while (exit != 0);
 	}
 
@@ -204,11 +216,81 @@ public class Main {
 	}
 
 	public static void makeReport() {
-
+		Report report = new Report();
+		report.setNameFile("reporte_AmazonViewer");
+		report.setExtension("txt");
+		report.setTitle(": : Vistos : :\n");
+		
+		StringBuilder contentReport = new StringBuilder().append(report.getTitle()).append(buildReportContent());
+		
+		report.setContent(contentReport.toString());
+		report.makeReport();
+		playMedia(5);
+		System.out.println("\nEl reporte ha sido generado con éxito\n");
+		showMenu();
 	}
 
 	public static void makeReport(Date date) {
-
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = dateFormat.format(date);
+		Report report = new Report();
+		report.setNameFile("reporte_" + dateString);
+		report.setExtension("txt");
+		report.setTitle(": : Vistos : :\n");
+		
+		StringBuilder contentReport = new StringBuilder().append(report.getTitle()).append(buildReportContent());
+		
+		report.setContent(contentReport.toString());
+		report.makeReport();
+		playMedia(5);
+		System.out.println("\nEl reporte del día ha sido generado con éxito\n");
+		showMenu();
 	}
-
+	
+	private static String buildReportContent() {
+		StringBuilder contentReport = new StringBuilder();
+		
+		try {
+			for (Movie movie : movies) {
+				if(movie.getIsViewed()) {
+					contentReport.append(movie.toString()).append("\n");
+				}
+			}
+		} catch (NullPointerException e) {
+			contentReport.append("\nNo se ha visto ninguna película\n");
+		}
+		
+		try {
+			for (Series series : series) {
+				if(series.getIsViewed()) {
+					contentReport.append(series.toString()).append("\n");
+					for(Chapter chapter: series.getChapters()) {
+						if(chapter.getIsViewed()) {
+							contentReport.append(chapter.toString()).append("\n");
+						}
+					}
+				} 
+			}
+		} catch (NullPointerException e) {
+			contentReport.append("\nNo se ha visto ninguna serie\n");
+		}
+		
+		try {
+			for (Book book : books) {
+				if(book.getHasBeenRead()) {
+					contentReport.append(book.toString()).append("\n");
+				}
+			}
+		} catch (NullPointerException e) {
+			contentReport.append("\nNo se ha leído ningún libro\n");
+		}
+		
+		return contentReport.toString();
+	}
+	
+	private static void playMedia(int linesToPrint) {
+		for(int i = 0; i< linesToPrint; i++) {
+			System.out.println(".");
+		}
+	}
 }

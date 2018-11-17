@@ -18,8 +18,8 @@ public class Book extends Publication implements IVisualizable{
 	private boolean hasBeenRead;
 	private int timeReading;
 	
-	public Book(String title, Date editorialDate, String editorial, String[] authors, int id, String isbn, boolean hasBeenRead) {
-		super(title, editorialDate, editorial, authors);
+	public Book(String title, Date editionDate, String editorial, String[] authors, int id, String isbn, boolean hasBeenRead) {
+		super(title, editionDate, editorial, authors);
 		this.id = id;
 		this.isbn = isbn;
 		this.hasBeenRead = hasBeenRead;
@@ -50,7 +50,11 @@ public class Book extends Publication implements IVisualizable{
 		this.isbn = isbn;
 	}
 
-	public String isHasBeenRead() {
+	public boolean getHasBeenRead() {
+		return this.hasBeenRead;
+	}
+	
+	public String hasBeenRead() {
 		return hasBeenRead? "Yes": "No";
 	}
 
@@ -68,7 +72,8 @@ public class Book extends Publication implements IVisualizable{
 
 	@Override
 	public String toString() {
-		return "Title: " + getTitle() + 
+		return "\nBOOK" + 
+				"\nTitle: " + getTitle() + 
 				"\nAutores: " + "" + 
 				"\nEditorial: " + getEditorial() + 
 				"\nEdición: " + getEditionDate() + 

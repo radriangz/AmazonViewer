@@ -3,7 +3,7 @@
  */
 package com.radrian.amazonviewer.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * @author RAdrian
@@ -12,9 +12,8 @@ import java.sql.Date;
 public class Magazine extends Publication {
 	private int id;
 
-	public Magazine(String title, Date editorialDate, String editorial, String[] authors, int id) {
-		super(title, editorialDate, editorial, authors);
-		this.id = id;
+	public Magazine(String title, Date editionDate, String editorial) {
+		super(title, editionDate, editorial);
 	}
 
 	public int getId() {

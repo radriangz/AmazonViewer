@@ -59,6 +59,10 @@ public class Film {
 	public String isViewed() {
 		return (this.isViewed? "Si": "No");
 	}
+	
+	public boolean getIsViewed() {
+		return isViewed;
+	}
 
 	public void setViewed(boolean viewed) {
 		this.isViewed = viewed;

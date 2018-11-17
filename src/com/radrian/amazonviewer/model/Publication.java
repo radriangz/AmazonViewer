@@ -4,15 +4,21 @@ import java.util.Date;
 
 public class Publication {
 	private String title;
-	private Date editorialDate;
+	private Date editionDate;
 	private String editorial;
 	private String[] authors;
 
-	public Publication(String title, Date editorialDate, String editorial, String[] authors) {
+	public Publication(String title, Date editionlDate, String editorial, String[] authors) {
 		this.title = title;
-		this.editorialDate = editorialDate;
+		this.editionDate = editionlDate;
 		this.editorial = editorial;
 		this.authors = authors;
+	}
+
+	public Publication(String title, Date editionDate, String editorial) {
+		this.title = title;
+		this.editionDate = editionDate;
+		this.editorial = editorial;
 	}
 
 	public String getTitle() {
@@ -24,11 +30,11 @@ public class Publication {
 	}
 
 	public Date getEditionDate() {
-		return editorialDate;
+		return editionDate;
 	}
 
 	public void setEditionDate(Date editionDate) {
-		this.editorialDate = editionDate;
+		this.editionDate = editionDate;
 	}
 
 	public String getEditorial() {
