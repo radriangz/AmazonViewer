@@ -2,6 +2,17 @@ package com.radrian.amazonviewer.model;
 
 import java.util.Date;
 
+/** 
+ *<h1>Publication</h1>
+ * This is a parent class. 
+ *<p>
+ * It is Publication family's parent, contains parameters for books and magazines.
+ * 
+ *@author RAdrian 
+ *@version 1.1
+ *@since 2018
+ * 
+ **/
 public class Publication {
 	private String title;
 	private Date editionDate;

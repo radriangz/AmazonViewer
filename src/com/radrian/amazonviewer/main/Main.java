@@ -15,7 +15,18 @@ import com.radrian.amazonviewer.model.Series;
 import com.radrian.makereport.model.Report;
 
 /**
+ * <h1>Amazon Viewer<h1>
+ * <p>
+ * AmazonViewer is a program which allows to visualize, Movies, Series and it's
+ * chapters, Books and Magazines. AmazonViewer also allows to generate general
+ * reports and current date reports.
+ * <p>
+ * Some rules are applied, all elements can be visualized (read or watched) except
+ * Magazines, this are only to be seen as a catalog, not read them.
+ * <p>
  * @author RAdrian
+ * @version 1.0
+ * @since 2018
  *
  */
 public class Main {
@@ -28,9 +39,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
 		showMenu();
-
 	}
 
 	public static void showMenu() {
@@ -98,14 +107,7 @@ public class Main {
 			}
 			if(userInput > 0) {
 				Movie movieSelected = movies.get(userInput-1);
-				movieSelected.setViewed(true);
-				Date dateI = movieSelected.startToWatch(new Date());
-
-				playMedia(100000);
-				
-				movieSelected.stopWatching(dateI, new Date());
-				System.out.println("\nViste: " + movieSelected + 
-									"\nPor: " + movieSelected.getTimeViewed() + " milisegundos");
+				movieSelected.view();
 			}
 
 		} while (exit != 0);
@@ -160,14 +162,7 @@ public class Main {
 			}
 			if(userInput > 0) {
 				Chapter chapterSelected = chaptersOfSeriesSelected.get(userInput-1);
-				chapterSelected.setViewed(true);
-				Date dateI = chapterSelected.startToWatch(new Date());
-
-				playMedia(100000);
-
-				chapterSelected.stopWatching(dateI, new Date());
-				System.out.println("\nViste: \n" + chapterSelected + 
-									"\nPor: " + chapterSelected.getTimeViewed() + " milisegundos");
+				chapterSelected.view();
 			}
 			
 		} while (exit != 0);
@@ -193,14 +188,7 @@ public class Main {
 			} 
 			if(userInput > 0) {
 				Book bookSelected = books.get(userInput-1);
-				bookSelected.setHasBeenRead(true);
-				Date dateI = bookSelected.startToWatch(new Date());
-
-				playMedia(100000);
-				
-				bookSelected.stopWatching(dateI, new Date());
-				System.out.println("\nLeiste: \n" + bookSelected + 
-									"\nPor: " + bookSelected.getTimeReading() + " milisegundos");
+				bookSelected.view();
 			}
 
 		}while (exit != 0);
@@ -225,7 +213,7 @@ public class Main {
 		
 		report.setContent(contentReport.toString());
 		report.makeReport();
-		playMedia(5);
+//		playMedia(5);
 		System.out.println("\nEl reporte ha sido generado con éxito\n");
 		showMenu();
 	}
@@ -242,7 +230,7 @@ public class Main {
 		
 		report.setContent(contentReport.toString());
 		report.makeReport();
-		playMedia(5);
+//		playMedia(5);
 		System.out.println("\nEl reporte del día ha sido generado con éxito\n");
 		showMenu();
 	}
@@ -288,9 +276,6 @@ public class Main {
 		return contentReport.toString();
 	}
 	
-	private static void playMedia(int linesToPrint) {
-		for(int i = 0; i< linesToPrint; i++) {
-			System.out.println(".");
-		}
-	}
+	
+	
 }

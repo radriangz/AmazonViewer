@@ -1,6 +1,19 @@
 package com.radrian.amazonviewer.model;
 
-public class Film {
+/**
+ * <h1>Film</h1>
+ * <p>
+ * Film is an abstract parent class.
+ * </p>
+ * Parents the family class Films, can't be instantiated because it's abstract, 
+ * contains the abstract method {@code view();} 
+
+ * @author RAdrian
+ * @version 1.1
+ * @since 2018
+ *
+ */
+public abstract class Film {
 	private String title;
 	private String genre;
 	private String creator;
@@ -67,5 +80,10 @@ public class Film {
 	public void setViewed(boolean viewed) {
 		this.isViewed = viewed;
 	}
-
+	
+	/**
+	 * {@code view();} This is the abstract method to be inherited to the family.
+	 * */
+	public abstract void view();
+	
 }
