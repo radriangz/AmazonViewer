@@ -13,6 +13,7 @@ import com.radrian.amazonviewer.model.Chapter;
 import com.radrian.amazonviewer.model.Movie;
 import com.radrian.amazonviewer.model.Series;
 import com.radrian.makereport.model.Report;
+import com.radrian.util.AmazonUtil;
 
 /**
  * <h1>Amazon Viewer<h1>
@@ -55,32 +56,36 @@ public class Main {
 		System.err.println("0. Exit");
 
 		do {
-			int userInput = scan.nextInt();
+			int userInput = AmazonUtil.validateUserInputMenu(0, 6);
+
 			switch (userInput) {
 			case 0:
-				exit = 0;
-				break;
+					exit = 0;
+					break;
 			case 1:
-				showMovies();
-				break;
+					showMovies();
+					break;
 			case 2:
-				showSeries();
-				break;
+					showSeries();
+					break;
 			case 3:
-				showBooks();
-				break;
+					showBooks();
+					break;
 			case 4:
-				showMagazines();
-				break;
+					showMagazines();
+					break;
 			case 5:
-				makeReport();
-				break;
+					makeReport();
+					exit = 1;
+					break;
 			case 6:
-				makeReport(new Date());
-				break;
+					makeReport(new Date());
+					exit = 1;
+					break;
 			default:
-				System.out.println("\nSelecciona una opción válida.\n");
-				break;
+					System.out.println("\nSelecciona una opción válida.\n");
+					exit = 1;
+					break;
 			}
 
 		} while (exit != 0);
@@ -95,15 +100,19 @@ public class Main {
 			System.out.println("\n:: MOVIES ::");
 			
 			for (int i = 0; i < movies.size(); i++) {
-				System.out.println(
-						(i + 1) + ". " + movies.get(i).getTitle() + ". Visto: " + movies.get(i).isViewed());
+				System.out.println((i + 1) + ". " + 
+									movies.get(i).getTitle() + 
+									". Visto: " + movies.get(i).isViewed());
 			}
+			
 			System.out.println("0. Regresar al Menú.\n");
 			System.out.println("Selecciona el número de la película que quieres ver.");
-			int userInput = scan.nextInt();
+			int userInput = AmazonUtil.validateUserInputMenu(0, movies.size());
 			
 			if (userInput == 0) {
+				exit = 0;
 				showMenu();
+				break;
 			}
 			if(userInput > 0) {
 				Movie movieSelected = movies.get(userInput-1);

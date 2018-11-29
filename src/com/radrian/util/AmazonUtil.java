@@ -6,6 +6,7 @@ public class AmazonUtil {
 
 	public static int validateUserInputMenu(int min, int max) {
 		//Leer la respuesta del usuario
+		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		
 		//Validar respuesta int

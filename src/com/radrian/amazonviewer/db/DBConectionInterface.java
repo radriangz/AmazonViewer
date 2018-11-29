@@ -7,15 +7,17 @@ import static com.radrian.amazonviewer.db.DataBase.*;
 public interface DBConectionInterface {
 	default Connection connectToDB() {
 		Connection connection = null;
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(URL+DB, USER, PASSWORD);
+			String url = URL + DB;
+			System.out.println(url + " " + USER + " " + PASSWORD);
+			connection = DriverManager.getConnection(url, USER, PASSWORD);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			return connection;
 		}
-		
+
 	}
 }
